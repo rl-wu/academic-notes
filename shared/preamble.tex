@@ -1,0 +1,30 @@
+\usepackage[UTF8]{ctex}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+% 页面设置
+\geometry{left=2.5cm,right=2.5cm,top=3cm,bottom=3cm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{吴睿林 \ 科研周报}
+\fancyhead[R]{\today}
+\fancyfoot[C]{\thepage}
+
+% 颜色定义
+\definecolor{sectioncolor}{RGB}{51,102,153}
+\definecolor{subsectioncolor}{RGB}{102,153,204}
+
+% 标题格式
+\titleformat{\section}{\Large\bfseries\color{sectioncolor}}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{subsectioncolor}}{}{0em}{}
+
+% 列表格式
+\setlist[itemize]{leftmargin=1.5em,itemsep=0.3em}
+\setlist[enumerate]{leftmargin=1.5em,itemsep=0.3em}
