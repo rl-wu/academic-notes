@@ -18,11 +18,15 @@ academic-notes/
 │   │   └── ...
 │   └── templates/
 │       └── weekly-template.tex
-├── study-notes/             # 📖 学习笔记
-│   ├── KroneckerProduct/     # 一般是专题讲义
+├── study-notes/              # 📖 学习笔记
+│   ├── Probability/          
+│   ├── LinearAlgebra/        
+│   │   └── KroneckerProduct/ # 一般是针对性强的专题笔记
+│   ├── Analysis/             
 │   └── ...
-└── shared/                  # 🔧 共享资源
-    ├── macros.tex          # 自定义宏
-    ├── preamble.tex        # 包导入
-    └── bibliography.bib    # 参考文献
+└── shared/                   # 🔧 共享资源
+    ├── macros.tex            # 自定义宏
+    ├── preamble.tex          # 包导入
+    └── bibliography.bib      # 参考文献
+
 ```
