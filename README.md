@@ -19,10 +19,12 @@ academic-notes/
 │   └── templates/
 │       └── weekly-template.tex
 ├── study-notes/              # 📖 学习笔记
-│   ├── Probability/          
+│   ├── Probability/  
+│   |   └── ...
 │   ├── LinearAlgebra/        
 │   │   └── KroneckerProduct/ # 一般是针对性强的专题笔记
-│   ├── Analysis/             
+│   ├── Analysis/      
+│   |   └── ...
 │   └── ...
 └── shared/                   # 🔧 共享资源
     ├── macros.tex            # 自定义宏
