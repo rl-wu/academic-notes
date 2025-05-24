@@ -1,4 +1,4 @@
-# 📚 学术笔记 Academic Notes
+# 📚  Academic Notes
 
 
 
@@ -19,7 +19,7 @@ academic-notes/
 │   └── templates/
 │       └── weekly-template.tex
 ├── study-notes/             # 📖 学习笔记
-│   ├── KroneckerProduct     # 一般是专题讲义
+│   ├── KroneckerProduct/     # 一般是专题讲义
 │   └── ...
 └── shared/                  # 🔧 共享资源
     ├── macros.tex          # 自定义宏
