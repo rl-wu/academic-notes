@@ -20,9 +20,7 @@ academic-notes/
 │       └── weekly-template.tex
 ├── study-notes/             # 📖 学习笔记
 │   ├── KroneckerProduct     # 一般是专题讲义
-|   
-│   └── templates/
-│       └── note-template.tex
+│   └── ...
 └── shared/                  # 🔧 共享资源
     ├── macros.tex          # 自定义宏
     ├── preamble.tex        # 包导入
