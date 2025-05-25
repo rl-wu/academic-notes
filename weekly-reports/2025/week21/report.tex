@@ -1,0 +1,77 @@
+\documentclass[12pt,a4paper]{article}
+
+\input{../../../shared/preamble}
+
+\begin{document}
+
+% 标题页
+\begin{center}
+    \vspace*{1cm}
+        {\Large\bfseries 科研第一周: 基础铺垫与准备工作}\\[1cm]
+    
+    \begin{tabular}{ll}
+        \textbf{日期：} & 2025 年第 21 周\\[0.3cm]
+    \end{tabular}
+\end{center}
+
+
+\section{本周工作总结}
+
+\subsection{学习内容}
+\begin{itemize}
+    \item \textbf{论文阅读}: 在浩华师兄的建议下, 开始阅读 AMP 算法入门文章 A Tutorial on AMP and State Evolution, 目前尚未完全读完, 在理解 condition lemma 上花了挺多时间
+    \item \textbf{基础知识补充}: 为了更好理解 condition lemma 中的内容, 我补充学习了以下知识点并让 AI 针对性地写了专题讲义, 方便我今后系统性地复习, 
+    讲义已上传到\notesref{}{我的 Github 仓库}:
+    \begin{enumerate}
+        \item \notesref{blob/main/study-notes/LinearAlgebra/KroneckerProduct/out/note.pdf}{Kronecker 积的定义、性质及其在矩阵运算中的应用}
+        \begin{itemize}
+            \item 在将矩阵向量化时 Kronecker 积非常好用, 这是矩阵版本的最小二乘解的基础
+        \end{itemize}
+        \item \notesref{blob/main/study-notes/LinearAlgebra/LeastSquaresDecomp/out/note.pdf}{最小二乘解的理论基础和计算方法, 及其背后的矩阵分解}
+        \begin{itemize}
+            \item Tutorial 中的两个 condition lemma 中都是用到了矩阵分解和最小二乘解的工具, 这个专题讲义系统讲解了这部分工具. 其中投影算子的部分我需要加深理解
+        \end{itemize}
+        \item \notesref{blob/main/study-notes/Probability/MMSE/out/note.pdf}{MMSE 最小均方误差估计理论}
+        \begin{itemize}
+            \item 在该讲义中我系统学习了 MMSE 及其延伸的相关结论, 学习的动机来源于 AMP 迭代中的函数 $\eta_t$ 如果选取使得 State Evolution 中期望最小的函数, 那么对应于 MMSE
+        \end{itemize}
+    \end{enumerate}
+    \item \textbf{课程回顾}: 回顾了\text{大数据分析中的算法}课程的主要内容, 这门课程广泛介绍了各种算法迭代格式, 但对算法数学性质的分析介绍得较少, 具体内容包括: 压缩感知, 低秩矩阵优化, 随机数值代数(随机矩阵乘法, 随机 SVD 分解算法), 最优运输, 次模优化, 整数规划, 随机优化方法(主要是随机梯度下降法, Adagrad, ADMM 等)
+
+\end{itemize}
+
+\subsection{科研工具配置}
+\begin{itemize}
+    \item \textbf{文献管理}: 配置了 Zotero 文献管理工具及相关插件, 实现以下功能:
+    \begin{enumerate}
+        \item 阅读时间记录
+        \item 阅读进度跟踪
+        \item 便捷翻译功能
+    \end{enumerate}
+    \item \textbf{学术笔记管理}: 在 Github 上创建了专门的学术笔记仓库, 用于上传和管理:
+    \begin{enumerate}
+        \item 每周周报
+        \item 学习笔记和专题讲义
+    \end{enumerate}
+\end{itemize}
+
+
+
+\section{下周大致安排}
+
+\begin{enumerate}
+    \item 继续理解 A Tutorial on AMP and State Evolution 中的证明细节
+    \item 周一: 网球课期末考试，人工智能期末考试
+    \item 周四: 户外探索期末考试，人工智能期末上机考试 
+    \item 做完并行计算上机作业, 并行加速稀疏矩阵向量乘法
+    \item 计划将学术笔记仓库链接更新至个人主页, 但个人主页还需进一步完善 (Claude Sonnet 4 写代码真的好厉害!)
+\end{enumerate}
+
+
+\vspace{1cm}
+\noindent\rule{\textwidth}{0.5pt}
+\begin{center}
+\textit{本周报共 \pageref{LastPage} 页}
+\end{center}
+
+\end{document}

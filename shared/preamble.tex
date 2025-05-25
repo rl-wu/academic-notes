@@ -4,10 +4,16 @@
 \usepackage{enumitem}
 \usepackage{xcolor}
 \usepackage{titlesec}
-\usepackage{hyperref}
+\usepackage[colorlinks=true, linkcolor=blue, pdfnewwindow=true]{hyperref}
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{lastpage}
+\usepackage{comment} % 注释多行代码
+\usepackage[backend=biber,style=authoryear]{biblatex}
+
+
+\addbibresource{references.bib}
 
 % 页面设置
 \geometry{left=2.5cm,right=2.5cm,top=3cm,bottom=3cm}
@@ -28,3 +34,5 @@
 % 列表格式
 \setlist[itemize]{leftmargin=1.5em,itemsep=0.3em}
 \setlist[enumerate]{leftmargin=1.5em,itemsep=0.3em}
+
+\newcommand{\notesref}[2]{\href{https://github.com/rl-wu/academic-notes/#1}{#2}}
