@@ -1,0 +1,308 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+% 颜色定义
+\definecolor{lemmacolor}{RGB}{230,240,250}
+\definecolor{lemmaframe}{RGB}{70,130,180}
+\definecolor{proofcolor}{RGB}{245,245,245}
+\definecolor{proofframe}{RGB}{128,128,128}
+\definecolor{titlecolor}{RGB}{25,25,112}
+
+% 页面设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{titlecolor}{\textbf{Mathematical Lemmas and Proofs}}}
+\fancyhead[R]{\textcolor{titlecolor}{\thepage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{titlecolor}\leaders\hrule height \headrulewidth\hfill}}
+
+% 标题样式
+\titleformat{\section}
+  {\Large\bfseries\color{titlecolor}}
+  {\thesection}
+  {1em}
+  {}
+
+% 定义数学操作符
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Exp}{\mathbb{E}}
+
+% 自定义命令
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\inner}[2]{\langle #1, #2 \rangle}
+
+% 定义美观的lemma环境
+\newtcbtheorem[number within=section]{lemma}{Lemma}%
+{enhanced,
+ colback=lemmacolor,
+ colframe=lemmaframe,
+ colbacktitle=lemmaframe,
+ coltitle=white,
+ fonttitle=\bfseries,
+ boxrule=1pt,
+ breakable,
+ left=8pt,
+ right=8pt,
+ top=8pt,
+ bottom=8pt,
+ arc=3pt,
+ fontupper=\normalsize,
+ before upper={\parindent15pt}
+}{lem}
+
+% 定义美观的proof环境
+\renewenvironment{proof}[1][\proofname]{%
+  \begin{tcolorbox}[
+    enhanced,
+    colback=proofcolor,
+    colframe=proofframe,
+    title={\textbf{#1}},
+    fonttitle=\bfseries,
+    coltitle=black,
+    colbacktitle=proofcolor,
+    boxrule=0.8pt,
+    arc=2pt,
+    breakable,
+    left=8pt,
+    right=8pt,
+    top=6pt,
+    bottom=6pt,
+    before upper={\parindent15pt}
+  ]
+}{%
+  \hfill$\square$
+  \end{tcolorbox}
+}
+
+% 美化公式环境
+\tcbset{
+  mathbox/.style={
+    enhanced,
+    colback=white,
+    colframe=blue!30!black,
+    boxrule=0.5pt,
+    arc=2pt,
+    left=4pt,
+    right=4pt,
+    top=4pt,
+    bottom=4pt
+  }
+}
+
+\title{\Huge\textcolor{titlecolor}{\textbf{Lemmas in bayati\_dynamics\_2011}}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\begin{tcolorbox}[width=0.8\textwidth,colback=blue!5!white,colframe=blue!50!black,arc=5pt]
+\centering
+\textbf{\Large Contents Overview}
+\vspace{0.5cm}
+
+\textbf{1.} Gaussian Matrix and Related Results\\
+\textbf{2.} Stein's Lemma\\
+\textbf{3.} Conditional Variance in Multivariate Gaussian
+\end{tcolorbox}
+\end{center}
+
+
+\section{Gaussian Matrix and Related Results}
+
+\begin{lemma}{Gaussian Matrix Lemma}{gaussian-matrix}
+Let $\tilde{A}\in\R^{n\times n}$ be a (real) Gaussian matrix whose entries are independent $N(0,1/n)$ random variables. Fix any two deterministic vectors $u,v\in\R^n$ with $\norm{u}=\norm{v}=1$. Then:
+
+\begin{enumerate}
+\item[(a)] 
+\begin{tcolorbox}[mathbox]
+\[
+v^{\mathsf{T}}\,\tilde{A}\,u 
+\overset{d}{=}\frac{Z}{\sqrt{n}}, 
+\quad Z\sim N(0,1).
+\]
+\end{tcolorbox}
+
+\item[(b)] For every fixed unit-norm $u\in\R^n$,
+\begin{tcolorbox}[mathbox]
+\[
+\lim_{n\to\infty}\norm{\tilde{A}\,u}^2 
+= 1 
+\quad\text{almost surely.}
+\]
+\end{tcolorbox}
+
+\item[(c)] Let $d\leq n$. Fix any $d$-dimensional subspace $W\subset\R^n$, and choose an orthogonal basis 
+\[
+w_1,\dots,w_d \quad\text{of }W
+\]
+so that $\norm{w_i}^2 = n$ for each $i=1,\dots,d$. Let 
+\[
+D = \bigl[w_1 \;|\; w_2 \;|\;\dots\;|\; w_d\bigr]\in\R^{n\times d},
+\]
+and let $P_W = D\,(D^{\mathsf{T}}D)^{-1}D^{\mathsf{T}} = \frac{1}{n}\,D\,D^{\mathsf{T}}$ be the orthogonal projector onto~$W$. Then there exists a random vector $x\in\R^d$ such that
+\begin{tcolorbox}[mathbox]
+\[
+P_W\,\bigl(\tilde{A}\,u\bigr) = D\,x,
+\quad\text{and}\quad
+\lim_{n\to\infty} \norm{x} = 0 
+\quad\text{almost surely.}
+\]
+\end{tcolorbox}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We prove each part in turn.
+
+\vspace{0.3cm}
+\textcolor{lemmaframe}{\textbf{Part (a).}} 
+Since $\tilde{A}_{ij}\overset{\text{i.i.d.}}{\sim}N(0,1/n)$, we can write
+\[
+v^{\mathsf{T}}\,\tilde{A}\,u 
+=\sum_{i=1}^n \sum_{j=1}^n v_i\,\tilde{A}_{ij}\,u_j.
+\]
+Each $\tilde{A}_{ij}\sim N(0,1/n)$ and all entries are independent. A linear combination of independent Gaussian variables is Gaussian with variance equal to the sum of the squares of the coefficients. Hence
+\[
+\Var\bigl(v^{\mathsf{T}}\,\tilde{A}\,u\bigr)
+=
+\sum_{i,j} (v_i\,u_j)^2 \cdot \frac{1}{n}
+=
+\frac{1}{n}\Bigl(\sum_{i}v_i^2\Bigr)\Bigl(\sum_{j}u_j^2\Bigr)
+=
+\frac{1}{n},
+\]
+since $\norm{v}^2=\norm{u}^2=1$. Therefore 
+\[
+v^{\mathsf{T}}\,\tilde{A}\,u \sim N\!\Bigl(0,\frac{1}{n}\Bigr)
+=\frac{1}{\sqrt{n}}\,N(0,1).
+\]
+
+\vspace{0.3cm}
+\textcolor{lemmaframe}{\textbf{Part (b).}} 
+Fix a deterministic unit vector $u\in\R^n$, $\norm{u}=1$. Write
+\[
+\tilde{A}\,u 
+=
+\bigl(X_1,\dots,X_n\bigr)^{\mathsf{T}},
+\qquad
+X_i =\sum_{j=1}^n \tilde{A}_{ij}\,u_j.
+\]
+Since for each fixed $i$, $\{\tilde{A}_{ij}\}_{j=1}^n$ are i.i.d.\ $N(0,1/n)$, we have $X_i \sim N(0,1/n)$ and $\{X_i\}_{i=1}^n$ are independent. 
+
+Therefore $\norm{\tilde{A}\,u}^2 =\sum_{i=1}^n X_i^2$. By the strong law of large numbers:
+\[
+\norm{\tilde{A}\,u}^2 \longrightarrow 1 \quad\text{almost surely as }n\to\infty.
+\]
+
+\vspace{0.3cm}
+\textcolor{lemmaframe}{\textbf{Part (c).}} 
+Following the construction in the lemma statement, we define $x =\frac{1}{n}\,D^{\mathsf{T}}\,(\tilde{A}\,u)$. Through detailed Gaussian analysis, we can show that $D^{\mathsf{T}}(\tilde{A}\,u)\sim N(0,I_d)$ independently of $n$. 
+
+Since $\norm{x} = \frac{1}{n}\,\norm{\xi_n}$ where $\norm{\xi_n}^2\sim \chi^2_d$, by the Borel-Cantelli lemma:
+\[
+\norm{x} = \frac{1}{n}\,\norm{\xi_n} \longrightarrow 0
+\quad\text{almost surely.}
+\]
+\end{proof}
+
+\section{Stein's Lemma}
+
+\begin{lemma}{Stein's Lemma}{stein}
+Let $(Z_1,Z_2)$ be a jointly Gaussian random vector with mean zero. Let $\varphi:\R\to\R$ be any (weakly) differentiable function such that $\Exp\bigl|\varphi'(Z_2)\bigr|<\infty$ and $\Exp\bigl|Z_1\,\varphi(Z_2)\bigr|<\infty$. Then
+\begin{tcolorbox}[mathbox]
+\[
+\Exp\bigl[Z_1\,\varphi(Z_2)\bigr]
+=
+\Cov(Z_1,Z_2)\;\Exp\bigl[\varphi'(Z_2)\bigr].
+\]
+\end{tcolorbox}
+\end{lemma}
+
+\begin{proof}
+Write $\rho = \Cov(Z_1,Z_2)$ and $\sigma^2 = \Var(Z_2)$. Since $(Z_1,Z_2)$ is jointly Gaussian with zero mean, we have
+\[
+\Exp[Z_1\mid Z_2=z] = \frac{\rho}{\sigma^2}\,z.
+\]
+
+Using the tower property of expectation:
+\[
+\Exp\bigl[Z_1\,\varphi(Z_2)\bigr] = \Exp\Bigl[\varphi(Z_2)\;\Exp[Z_1\mid Z_2]\Bigr] = \frac{\rho}{\sigma^2}\,\Exp\bigl[Z_2\,\varphi(Z_2)\bigr].
+\]
+
+Now we show that $\Exp[Z_2\,\varphi(Z_2)] = \sigma^2\,\Exp[\varphi'(Z_2)]$ using integration by parts with the Gaussian density. The key identity is:
+\[
+z\,f(z) = -\,\sigma^2\,f'(z),
+\]
+where $f(z)$ is the density of $N(0,\sigma^2)$. Integration by parts then yields the desired result.
+\end{proof}
+
+\section{Conditional Variance in Multivariate Gaussian}
+
+\begin{lemma}{Conditional Variance in a Multivariate Gaussian}{conditional-variance}
+Let $(Z_1,\dots,Z_t)$ be a (zero-mean) Gaussian random vector in $\R^t$. Assume the covariance matrix of the first $t-1$ components,
+\[
+C =\Cov\bigl(Z_1,\dots,Z_{t-1}\bigr) \in\R^{(t-1)\times(t-1)},
+\]
+is invertible. Define the vector
+\[
+u =\bigl(u_1,\dots,u_{t-1}\bigr)^{\mathsf{T}}, 
+\quad
+\text{where }u_i =\Exp\bigl[Z_t\,Z_i\bigr], 
+\;i=1,\dots,t-1.
+\]
+Then the conditional variance of $Z_t$ given $(Z_1,\dots,Z_{t-1})$ satisfies
+\begin{tcolorbox}[mathbox]
+\[
+\Var\bigl(Z_t \mid Z_1,\dots,Z_{t-1}\bigr)
+=
+\Exp[Z_t^2]
+-u^{\mathsf{T}}\,C^{-1}\,u.
+\]
+\end{tcolorbox}
+\end{lemma}
+
+\begin{proof}
+Let $Z = (Z_1,\dots,Z_{t-1})^{\mathsf{T}}$ and consider the best linear predictor
+\[
+\hat{Z}_t = u^{\mathsf{T}}\,C^{-1}\,Z.
+\]
+
+Define the residual $R = Z_t -\hat{Z}_t$. By the properties of Gaussian distributions, $R$ is independent of $Z$, so
+\[
+\Var\bigl(Z_t \mid Z_1,\dots,Z_{t-1}\bigr) = \Var(R).
+\]
+
+Computing $\Var(R)$ using the standard formula:
+\[
+\Var(R) = \Var(Z_t) - 2\,\Cov(Z_t,\hat{Z}_t) + \Var(\hat{Z}_t),
+\]
+where each term can be expressed in terms of $u$ and $C$, yielding the final result.
+\end{proof}
+
+\vspace{1cm}
+\begin{center}
+\begin{tcolorbox}[width=0.9\textwidth,colback=blue!5!white,colframe=blue!50!black,arc=5pt]
+\centering
+\textbf{\Large End of Document}
+\vspace{0.3cm}
+
+These lemmas form fundamental building blocks in probability theory, 
+statistical analysis, and mathematical statistics.
+\end{tcolorbox}
+\end{center}
+
+\end{document}

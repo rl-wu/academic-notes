@@ -1,0 +1,91 @@
+\documentclass[12pt,a4paper]{article}
+
+\input{../../../shared/preamble}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\inner}[2]{\langle #1, #2 \rangle}
+
+% 定义数学操作符
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Exp}{\mathbb{E}}
+
+\begin{document}
+
+% 标题页
+\begin{center}
+    \vspace*{1cm}
+        {\Large\bfseries 第二周: 通识课期末考试 \& 理解高斯向量相关的结论}\\[1cm]
+    
+    \begin{tabular}{ll}
+        \textbf{日期：} & 2025 年第 22 周\\[0.3cm]
+    \end{tabular}
+\end{center}
+
+
+\section{本周工作总结}
+
+\subsection{学习内容}
+\begin{itemize}
+    \item \textbf{期末考试}: 完成了 4 门通识课期末考试，接下来专业课考试和大作业提交日期集中在 6 月 17 日到 6 月 20 日
+    
+    \item \textbf{论文进度}: 继续阅读 The dynamics of message passing on dense graphs, with applications to compressed sensing，重点学习了第 3.7 节的几个核心引理
+    \begin{itemize}
+        \item 重点理解 3.7 节 Gaussian random vector 相关的引理
+        \item 认识到 AMP 算法的理论结论在这里高度依赖于 Gaussian distribution 
+    \end{itemize}
+    
+    \item \textbf{核心数学结论梳理}: 通过学习论文的第 3.7 节，重点理解了以下 3 个引理，这三个引理在文章中直接给出，没有给出证明:
+    \[\boxed{
+    P_W\,\bigl(\tilde{A}\,u\bigr) = D\,x,
+    \quad\text{and}\quad
+    \lim_{n\to\infty} \norm{x} = 0 
+    \quad\text{almost surely.}}
+    \]
+    \[\boxed{
+    \Exp\bigl[Z_1\,\varphi(Z_2)\bigr]
+    =
+    \Cov(Z_1,Z_2)\;\Exp\bigl[\varphi'(Z_2)\bigr].}
+    \]
+    \[\boxed{
+    \Var\bigl(Z_t \mid Z_1,\dots,Z_{t-1}\bigr)
+    =
+    \Exp[Z_t^2]
+    -u^{\mathsf{T}}\,C^{-1}\,u.}
+    \]
+    
+    这些引理的详细描述和证明已整理并上传至 \notesref{blob/main/study-notes/Probability/LemmaNormalRandom/out/note.pdf}{GitHub 仓库的 LemmaNormalRandom 文件夹}
+    
+    \item \textbf{概率论基础复习}: 复习了概率中的各种收敛以及相关的结论
+    \begin{enumerate}
+        \item \textbf{弱收敛/依分布收敛}
+        \item \textbf{依概率收敛}
+        \item \textbf{几乎处处收敛}
+    \end{enumerate}
+    相关复习笔记已上传至 \notesref{blob/main/study-notes/Probability/Convergence/out/note.pdf}{GitHub 仓库的 Convergence 文件夹}
+
+\end{itemize}
+
+
+
+\section{下周大致安排}
+
+\begin{enumerate}
+    \item 继续阅读 \cite{bayati_dynamics_2011} 中的证明细节
+    \item 完成数值分析课程的数值求解微分方程上机作业
+    \item 完成并行计算上机作业: 实现 GPU 版本的 SafeSoftmax 算法
+    \item 推进个人主页建设工作
+\end{enumerate}
+
+\vspace{1cm}
+\noindent\rule{\textwidth}{0.5pt}
+
+
+\begin{center}
+\textit{本周报共 \pageref{LastPage} 页}
+\end{center}
+
+\end{document}

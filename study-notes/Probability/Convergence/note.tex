@@ -1,0 +1,153 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[UTF8]{ctex}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\newtheorem{definition}{定义}
+\newtheorem{theorem}{定理}
+\newtheorem{proposition}{命题}
+\newtheorem{lemma}{引理}
+\newtheorem{corollary}{推论}
+
+\begin{document}
+
+\title{概率统计中的收敛}
+\author{}
+\date{}
+\maketitle
+
+\section{概率收敛的基本概念}
+
+\begin{definition}[几乎必然收敛]
+设 $\{X_n\}_{n=1}^{\infty}$ 是定义在概率空间 $(\Omega, \mathcal{F}, P)$ 上的随机变量序列，$X$ 是随机变量。称 $X_n$ \textbf{几乎必然收敛}到 $X$，记作 $X_n \xrightarrow{a.s.} X$，如果
+$$P\left(\lim_{n \to \infty} X_n = X\right) = 1$$
+等价地，
+$$P\left(\left\{\omega \in \Omega : \lim_{n \to \infty} X_n(\omega) = X(\omega)\right\}\right) = 1$$
+\end{definition}
+
+\begin{definition}[依概率收敛]
+称 $X_n$ \textbf{依概率收敛}到 $X$，记作 $X_n \xrightarrow{P} X$，如果对任意 $\varepsilon > 0$，有
+$$\lim_{n \to \infty} P(|X_n - X| > \varepsilon) = 0$$
+\end{definition}
+
+\begin{definition}[$L^p$ 收敛]
+设 $p \geq 1$。称 $X_n$ 在 \textbf{$L^p$ 意义下收敛}到 $X$，记作 $X_n \xrightarrow{L^p} X$，如果
+$$\lim_{n \to \infty} E[|X_n - X|^p] = 0$$
+特别地，当 $p = 2$ 时称为\textbf{均方收敛}，记作 $X_n \xrightarrow{m.s.} X$。
+\end{definition}
+
+\begin{definition}[依分布收敛/弱收敛]
+称 $X_n$ \textbf{依分布收敛}到 $X$，记作 $X_n \xrightarrow{d} X$ 或 $X_n \Rightarrow X$，如果对 $X$ 的分布函数 $F$ 的所有连续点 $x$，有
+$$\lim_{n \to \infty} F_n(x) = F(x)$$
+其中 $F_n$ 是 $X_n$ 的分布函数。
+\end{definition}
+
+\section{收敛关系的层次结构}
+
+\begin{theorem}[收敛的蕴含关系]
+对于随机变量序列 $\{X_n\}$，有以下蕴含关系：
+\begin{align}
+X_n \xrightarrow{a.s.} X &\Rightarrow X_n \xrightarrow{P} X \\
+X_n \xrightarrow{L^p} X &\Rightarrow X_n \xrightarrow{P} X \\
+X_n \xrightarrow{P} X &\Rightarrow X_n \xrightarrow{d} X
+\end{align}
+特别地，几乎必然收敛和 $L^p$ 收敛之间没有一般的蕴含关系。
+\end{theorem}
+
+\section{弱收敛的重要性质}
+
+\begin{theorem}[连续映射定理]
+设 $g: \mathbb{R} \to \mathbb{R}$ 是连续函数，如果 $X_n \xrightarrow{d} X$，则
+$$g(X_n) \xrightarrow{d} g(X)$$
+\end{theorem}
+
+\begin{theorem}[Slutsky定理]
+设 $X_n \xrightarrow{d} X$，$Y_n \xrightarrow{P} c$（其中 $c$ 是常数），则：
+\begin{align}
+X_n + Y_n &\xrightarrow{d} X + c \\
+X_n Y_n &\xrightarrow{d} cX \\
+\frac{X_n}{Y_n} &\xrightarrow{d} \frac{X}{c} \quad (c \neq 0)
+\end{align}
+\end{theorem}
+
+\begin{theorem}[有界连续函数的期望收敛]
+设 $X_n \xrightarrow{d} X$，$h: \mathbb{R} \to \mathbb{R}$ 是有界连续函数，则
+$$\lim_{n \to \infty} E[h(X_n)] = E[h(X)]$$
+前提是相应的期望存在。
+\end{theorem}
+
+\section{大数定律}
+
+\begin{theorem}[弱大数定律 (Khintchine)]
+设 $\{X_n\}$ 是独立同分布的随机变量序列，$E[X_1] = \mu < \infty$。令 $\overline{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$，则
+$$\overline{X}_n \xrightarrow{P} \mu$$
+\end{theorem}
+
+\begin{theorem}[强大数定律 (Kolmogorov)]
+设 $\{X_n\}$ 是独立同分布的随机变量序列，$E[|X_1|] < \infty$，$E[X_1] = \mu$。则
+$$\overline{X}_n \xrightarrow{a.s.} \mu$$
+\end{theorem}
+
+\section{中心极限定理}
+
+\begin{theorem}[经典中心极限定理 (Lindeberg-Lévy)]
+设 $\{X_n\}$ 是独立同分布的随机变量序列，$E[X_1] = \mu$，$\text{Var}(X_1) = \sigma^2 \in (0, \infty)$。则
+$$\frac{\sqrt{n}(\overline{X}_n - \mu)}{\sigma} \xrightarrow{d} N(0,1)$$
+或等价地，
+$$\sqrt{n}(\overline{X}_n - \mu) \xrightarrow{d} N(0, \sigma^2)$$
+\end{theorem}
+
+\begin{theorem}[Lindeberg中心极限定理]
+设 $\{X_n\}$ 是独立随机变量序列，$E[X_k] = \mu_k$，$\text{Var}(X_k) = \sigma_k^2$。令
+$$S_n = \sum_{k=1}^n X_k, \quad s_n^2 = \text{Var}(S_n) = \sum_{k=1}^n \sigma_k^2$$
+如果 Lindeberg 条件成立：对任意 $\varepsilon > 0$，
+$$\lim_{n \to \infty} \frac{1}{s_n^2} \sum_{k=1}^n E[(X_k - \mu_k)^2 \mathbf{1}_{|X_k - \mu_k| > \varepsilon s_n}] = 0$$
+则
+$$\frac{S_n - E[S_n]}{s_n} \xrightarrow{d} N(0,1)$$
+\end{theorem}
+
+\section{期望与极限的交换}
+
+\begin{theorem}[单调收敛定理]
+设 $\{X_n\}$ 是非负随机变量序列，且 $X_n \uparrow X$ a.s.（单调递增收敛），则
+$$\lim_{n \to \infty} E[X_n] = E[X]$$
+\end{theorem}
+
+\begin{theorem}[Fatou引理]
+设 $\{X_n\}$ 是非负随机变量序列，则
+$$E[\liminf_{n \to \infty} X_n] \leq \liminf_{n \to \infty} E[X_n]$$
+\end{theorem}
+
+\begin{theorem}[控制收敛定理 (Lebesgue)]
+设 $X_n \to X$ a.s.，且存在可积随机变量 $Y$ 使得 $|X_n| \leq Y$ a.s. 对所有 $n$ 成立，则
+$$\lim_{n \to \infty} E[X_n] = E[X]$$
+\end{theorem}
+
+\section{弱收敛的等价刻画}
+
+\begin{theorem}[Portmanteau定理]
+对随机变量 $X_n$ 和 $X$，以下条件等价：
+\begin{enumerate}
+\item $X_n \xrightarrow{d} X$
+\item 对所有有界连续函数 $f$：$E[f(X_n)] \to E[f(X)]$
+\item 对所有闭集 $F$：$\limsup_{n \to \infty} P(X_n \in F) \leq P(X \in F)$
+\item 对所有开集 $G$：$\liminf_{n \to \infty} P(X_n \in G) \geq P(X \in G)$
+\item 对所有使得 $P(X \in \partial A) = 0$ 的Borel集 $A$：$P(X_n \in A) \to P(X \in A)$
+\end{enumerate}
+其中 $\partial A$ 表示集合 $A$ 的边界。
+\end{theorem}
+
+\section{多元情形}
+
+\begin{definition}[多元弱收敛]
+设 $\{X_n\}$ 是 $\mathbb{R}^d$ 上的随机向量序列。称 $X_n$ 弱收敛到 $X$，记作 $X_n \Rightarrow X$，如果对所有有界连续函数 $f: \mathbb{R}^d \to \mathbb{R}$，有
+$$E[f(X_n)] \to E[f(X)]$$
+\end{definition}
+
+\begin{theorem}[多元中心极限定理]
+设 $\{X_n\}$ 是 $\mathbb{R}^d$ 上独立同分布的随机向量序列，$E[X_1] = \mu$，$\text{Cov}(X_1) = \Sigma$（正定）。则
+$$\sqrt{n}(\overline{X}_n - \mu) \xrightarrow{d} N(0, \Sigma)$$
+\end{theorem}
+
+\end{document}
